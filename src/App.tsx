@@ -1,25 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { FurnitureIndex } from "furniture/FurnitureIndex";
+import { MainIndex } from "./main/MainIndex";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainIndex />} />
+        <Route path="/Furniture" element={<FurnitureIndex />} />
+        {/* <Route path="/simulation/1" element={<VehicleCanvas />} />
+        <Route path="/etc/1" element={<BuildingCanvas />} /> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
