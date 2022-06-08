@@ -1,13 +1,11 @@
-import { combineReducers } from "redux";
-import furniture from "./furniture";
+import { configureStore } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
-const furnitureReducer = combineReducers({
-  furniture,
+import { furnitureSlice } from "./furniture";
+
+export const store = configureStore({
+  reducer: { furniture: furnitureSlice.reducer },
 });
-
-// 루트 리듀서를 내보내주세요.
-export default furnitureReducer;
-
-// 루트 리듀서의 반환값를 유추해줍니다
-// 추후 이 타입을 컨테이너 컴포넌트에서 불러와서 사용해야 하므로 내보내줍니다.
-export type FurnitureState = ReturnType<typeof furnitureReducer>;
+export type RootState = ReturnType<typeof store.getState>;
+export type DispatchType = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<DispatchType>();
