@@ -1,27 +1,71 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type ChairColumnType = {
-  select: string;
+type ChairBodyType = {
   material: string;
-  newChair: boolean;
-  chairColumn: Array<number>;
-  newSofa: boolean;
-  newDesk: boolean;
-  chairWidth: number;
+  width: number;
   height: number;
   side: number;
 };
 
-const initialState: ChairColumnType = {
+type ChairColumnType = {
+  material: string;
+  chairColumn: Array<Array<number>>;
+  width: Array<number>;
+  height: Array<number>;
+  side: number;
+};
+
+type ChairType = {
+  newChair: boolean;
+  body: ChairBodyType;
+  column: ChairColumnType;
+};
+
+type SofaOption = {
+  newSofa: boolean;
+  material: string;
+};
+
+type DeskOption = {
+  newDesk: boolean;
+  material: string;
+};
+
+type StoreType = {
+  select: string;
+
+  chairOption: ChairType;
+  sofaOption: SofaOption;
+  deskOption: DeskOption;
+};
+
+const initialState: StoreType = {
   select: "",
-  material: "",
-  newChair: false,
-  chairColumn: [],
-  newSofa: false,
-  newDesk: false,
-  chairWidth: 10,
-  height: 10,
-  side: 10,
+
+  chairOption: {
+    newChair: false,
+    body: {
+      material: "",
+      width: 10,
+      height: 10,
+      side: 10,
+    },
+    column: {
+      material: "",
+      chairColumn: [],
+      width: [],
+      height: [],
+      side: 10,
+    },
+  },
+  sofaOption: {
+    newSofa: false,
+    material: "",
+  },
+  deskOption: {
+    newDesk: false,
+    material: "",
+  },
 };
 
 export const furnitureSlice = createSlice({
@@ -31,62 +75,30 @@ export const furnitureSlice = createSlice({
     selectChange: (state, action) => {
       state.select = action.payload;
     },
-    setChairWidth: (state, action) => {
-      state.chairWidth = action.payload;
-    },
     setNewChair: (state, action) => {
-      state.newChair = action.payload;
+      if (!state.chairOption.newChair) state.chairOption.newChair = action.payload;
+      else {
+        state.chairOption = { ...initialState.chairOption, newChair: true };
+      }
     },
-    setChairColumn: (state, action) => {
-      console.log(state.chairColumn);
-      state.chairColumn = [...state.chairColumn, action.payload];
-      console.log(state.chairColumn);
-      console.log(action);
-      //state.chairColumn.push(action.payload);
+    createColumn: (state, action) => {
+      state.chairOption.column.chairColumn = [
+        ...state.chairOption.column.chairColumn,
+        action.payload[0],
+      ];
+      state.chairOption.column.width = [...state.chairOption.column.width, action.payload[1]];
+      state.chairOption.column.height = [...state.chairOption.column.height, action.payload[2]];
+    },
+    setChairWidth: (state, action) => {
+      const [value, index] = action.payload;
+      state.chairOption.column.width[index] = value;
+    },
+    setChairHeight: (state, action) => {
+      const [value, index] = action.payload;
+      state.chairOption.column.height[index] = value;
     },
   },
 });
 
-export const { selectChange, setChairWidth, setNewChair, setChairColumn } = furnitureSlice.actions;
-
-// const SOFA = "furniture/SOFA" as const;
-// const CHAIR = "furniture/CHAIR" as const;
-// const DESK = "furniture/DESK" as const;
-
-// export const chengeSofa = () => ({
-//   type: SOFA,
-// });
-// export const chengeChair = () => ({
-//   type: CHAIR,
-// });
-// export const chengeDesk = () => ({
-//   type: DESK,
-// });
-
-// type FurnitureAction =
-//   | ReturnType<typeof chengeSofa>
-//   | ReturnType<typeof chengeChair>
-//   | ReturnType<typeof chengeDesk>;
-
-// type FurnitureState = {
-//   select: string;
-// };
-
-// const initialState: FurnitureState = {
-//   select: "",
-// };
-
-// function furniture(state: FurnitureState = initialState, action: FurnitureAction): FurnitureState {
-//   switch (action.type) {
-//     case SOFA:
-//       return { select: "SOFA" };
-//     case CHAIR:
-//       return { select: "CHAIR" };
-//     case DESK:
-//       return { select: "DESK" };
-//     default:
-//       return state;
-//   }
-// }
-
-// export default furniture;
+export const { selectChange, setChairWidth, setChairHeight, setNewChair, createColumn } =
+  furnitureSlice.actions;
