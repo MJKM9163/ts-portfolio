@@ -9,11 +9,22 @@ import { Sofa } from "./customs/Sofa";
 const ControlBox = styled.div`
   position: absolute;
   right: 0px;
-  width: 300px;
+  width: 320px;
   height: 100vh;
   background-color: #ffe883a7;
-  border-radius: 20px 0px 0px 20px;
+  /* border-radius: 20px 0px 0px 50px; */
   z-index: 2;
+  overflow-x: hidden;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #ffba79;
+  }
+  ::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.514);
+  }
 
   .guide {
     padding: 5px 0px 5px 3px;
@@ -22,7 +33,7 @@ const ControlBox = styled.div`
 
   .title {
     margin-top: 5px;
-    padding: 5px 0px 5px 3px;
+    padding: 5px 0px 5px 5px;
     background-color: #ffdf74;
   }
 
@@ -64,9 +75,18 @@ const ControlBox = styled.div`
       }
     }
     .settingBox {
-      padding: 10px 0px 5px 5px;
+      padding: 10px 0px 5px 0px;
+
+      font-size: 18px;
+      .bodySet {
+      }
+
+      .cloumnSet {
+        margin-top: 15px;
+      }
 
       .select {
+        margin: 5px 0px 0px 10px;
         div {
           border-radius: 20%;
           margin: 0px 0px 0px 10px;
@@ -76,7 +96,6 @@ const ControlBox = styled.div`
           background-color: #ffffff9d;
         }
         span {
-          font-size: 20px;
           margin: 0px 0px 0px 10px;
           border-radius: 40%;
           vertical-align: 2px;
@@ -90,6 +109,7 @@ const ControlBox = styled.div`
         .s {
           position: relative;
           width: 300px;
+          margin: 0px 0px 0px 10px;
           padding-top: 5px;
         }
       }
