@@ -20,7 +20,7 @@ export const FurnitureIndex = () => {
           <ambientLight intensity={0.5} />
           <ModelIndex />
 
-          <OrbitControls />
+          <OrbitControls enablePan={false} />
         </Provider>
       </Canvas>
     </>
