@@ -3,11 +3,13 @@ import { Canvas } from "@react-three/fiber";
 import { Provider } from "react-redux";
 import { ControlTap } from "./interface/control/ControlTap";
 import { ModelIndex } from "./models/ModelIndex";
+import { Event } from "./modules/event";
 import { store } from "./modules/store";
 
 export const FurnitureIndex = () => {
   return (
     <>
+      <Event />
       <ControlTap />
       <Canvas
         camera={{
