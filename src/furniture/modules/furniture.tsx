@@ -1,46 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type ChairBodyType = {
-  material: string;
-  width: number;
-  height: number;
-  side: number;
-};
-
-type ChairColumnType = {
-  material: string;
-  chairColumn: Array<Array<number>>;
-  width: Array<number>;
-  height: Array<number>;
-  side: number;
-};
-
-type ChairType = {
-  newChair: boolean;
-  body: ChairBodyType;
-  column: ChairColumnType;
-};
-
-type SofaOption = {
-  newSofa: boolean;
-  material: string;
-};
-
-type DeskOption = {
-  newDesk: boolean;
-  material: string;
-};
-
 type StoreType = {
   select: string;
+  guide: boolean;
 
-  chairOption: ChairType;
-  sofaOption: SofaOption;
-  deskOption: DeskOption;
+  chairOption: {
+    newChair: boolean;
+    body: { material: string; width: number; height: number; side: number };
+    column: {
+      material: string;
+      chairColumn: Array<Array<number>>;
+      width: Array<number>;
+      height: Array<number>;
+      rotation: Array<Array<number>>;
+      side: number;
+    };
+  };
+  sofaOption: {
+    newSofa: boolean;
+    material: string;
+  };
+  deskOption: {
+    newDesk: boolean;
+    material: string;
+  };
 };
 
 const initialState: StoreType = {
   select: "",
+  guide: true,
 
   chairOption: {
     newChair: false,
@@ -55,6 +43,7 @@ const initialState: StoreType = {
       chairColumn: [],
       width: [],
       height: [],
+      rotation: [],
       side: 10,
     },
   },
@@ -75,6 +64,9 @@ export const furnitureSlice = createSlice({
     selectChange: (state, action) => {
       state.select = action.payload;
     },
+    setGuide: (state, action) => {
+      state.guide = action.payload;
+    },
     setNewChair: (state, action) => {
       if (!state.chairOption.newChair) state.chairOption.newChair = action.payload;
       else {
@@ -88,6 +80,7 @@ export const furnitureSlice = createSlice({
       ];
       state.chairOption.column.width = [...state.chairOption.column.width, action.payload[1]];
       state.chairOption.column.height = [...state.chairOption.column.height, action.payload[2]];
+      state.chairOption.column.rotation = [...state.chairOption.column.rotation, action.payload[3]];
     },
     setChairWidth: (state, action) => {
       const [value, index] = action.payload;
@@ -97,8 +90,19 @@ export const furnitureSlice = createSlice({
       const [value, index] = action.payload;
       state.chairOption.column.height[index] = value;
     },
+    setChairRotation: (state, action) => {
+      const [value, index, xyz] = action.payload;
+      state.chairOption.column.rotation[index][xyz] = value;
+    },
   },
 });
 
-export const { selectChange, setChairWidth, setChairHeight, setNewChair, createColumn } =
-  furnitureSlice.actions;
+export const {
+  selectChange,
+  setGuide,
+  setChairWidth,
+  setChairHeight,
+  setChairRotation,
+  setNewChair,
+  createColumn,
+} = furnitureSlice.actions;
