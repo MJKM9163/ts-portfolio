@@ -87,16 +87,8 @@ const ControlBox = styled.div`
 
       .select {
         margin: 5px 0px 0px 10px;
-        div {
-          border-radius: 20%;
-          margin: 0px 0px 0px 10px;
-          padding-right: 10px;
-          display: inline-block;
-          width: max-content;
-          background-color: #ffffff9d;
-        }
         span {
-          margin: 0px 0px 0px 10px;
+          margin: 0px 0px 0px 0px;
           border-radius: 40%;
           vertical-align: 2px;
           :hover {
@@ -113,19 +105,36 @@ const ControlBox = styled.div`
           padding-top: 5px;
         }
       }
+
+      .name {
+        width: 50px;
+        display: inline-block;
+        vertical-align: 3px;
+      }
+
+      .inputs {
+        width: 230px;
+        margin-top: -28px;
+        margin-left: 42px;
+
+        .xyzBox {
+          .xyz {
+            margin-right: 0px;
+            display: inline-block;
+            vertical-align: 4px;
+          }
+        }
+      }
     }
 
     input[type="range"] {
-      position: absolute;
       top: 9px;
       left: 70px;
-      -webkit-box-sizing: initial;
-      font-family: "Hack";
+      margin-left: 10px;
       font-size: 11px;
       -webkit-appearance: none;
       height: 20px;
       display: inline-block;
-      width: calc(50%);
       background-color: rgb(63, 63, 63);
     }
     input[type="range"]::-webkit-slider-thumb {
@@ -139,11 +148,12 @@ const ControlBox = styled.div`
       }
     }
     input[type="text"] {
-      position: absolute;
       background-color: rgb(54, 54, 54);
-      padding-left: 1%;
+      padding-left: 5px;
+      margin-left: 10px;
+      vertical-align: 6px;
       height: 20px;
-      width: 16%;
+      width: 50px;
       display: inline-block;
       overflow: hidden;
       border: none;
@@ -152,8 +162,6 @@ const ControlBox = styled.div`
       line-height: 20px;
       word-break: break-all;
       box-sizing: border-box;
-      top: 11px;
-      right: 15px;
     }
   }
 `;
