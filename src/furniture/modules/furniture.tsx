@@ -10,6 +10,7 @@ type StoreType = {
     column: {
       material: string;
       chairColumn: Array<Array<number>>;
+      select: number;
       width: Array<number>;
       height: Array<number>;
       rotation: Array<Array<number>>;
@@ -41,6 +42,7 @@ const initialState: StoreType = {
     column: {
       material: "",
       chairColumn: [],
+      select: -1,
       width: [],
       height: [],
       rotation: [],
@@ -82,6 +84,9 @@ export const furnitureSlice = createSlice({
       state.chairOption.column.height = [...state.chairOption.column.height, action.payload[2]];
       state.chairOption.column.rotation = [...state.chairOption.column.rotation, action.payload[3]];
     },
+    columnSelect: (state, action) => {
+      state.chairOption.column.select = action.payload;
+    },
     setChairWidth: (state, action) => {
       const [value, index] = action.payload;
       state.chairOption.column.width[index] = value;
@@ -105,4 +110,5 @@ export const {
   setChairRotation,
   setNewChair,
   createColumn,
+  columnSelect,
 } = furnitureSlice.actions;
