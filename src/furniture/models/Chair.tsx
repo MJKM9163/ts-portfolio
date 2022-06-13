@@ -1,5 +1,5 @@
 import { ThreeEvent, useFrame } from "@react-three/fiber";
-import { createColumn } from "furniture/modules/furniture";
+import { createColumn, columnSelect } from "furniture/modules/furniture";
 import { RootState } from "furniture/modules/store";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,13 +7,14 @@ import { Color, Vector3 } from "three";
 
 const Column = () => {
   const ref = useRef<THREE.Mesh>(null);
-  const { chairColumn, height, width, rotation } = useSelector(
+  const { chairColumn, select, height, width, rotation } = useSelector(
     (state: RootState) => state.furniture.chairOption.column
   );
-
+  const dispatch = useDispatch();
+  console.log(select);
   return (
     <group>
-      {chairColumn.map((i, columnIndex) => (
+      {chairColumn.map((i, columnIndex: number) => (
         <group
           key={"columnBox" + columnIndex}
           position={new Vector3(i[0], i[1], i[2])}
@@ -21,7 +22,8 @@ const Column = () => {
           <mesh
             onClick={(e: any) => {
               e.stopPropagation();
-              console.log(e);
+
+              dispatch(columnSelect(select === columnIndex ? -1 : columnIndex));
             }}
             onPointerOver={(e: any) => {
               e.stopPropagation();
@@ -38,6 +40,7 @@ const Column = () => {
             />
             <meshBasicMaterial color={"blue"} />
           </mesh>
+          {columnIndex === select ? <axesHelper dispose={null} scale={5} /> : null}
         </group>
       ))}
     </group>
