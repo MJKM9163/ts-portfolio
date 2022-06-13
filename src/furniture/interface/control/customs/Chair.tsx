@@ -189,7 +189,7 @@ export const Chair = () => {
                           <input
                             type={"text"}
                             step={0.1}
-                            value={select.column.rotation[index][0]}
+                            value={select.column.rotation[index][0].toFixed(1)}
                             readOnly
                           />
                         </div>
@@ -208,7 +208,7 @@ export const Chair = () => {
                           <input
                             type={"text"}
                             step={0.1}
-                            value={select.column.rotation[index][1]}
+                            value={select.column.rotation[index][1].toFixed(1)}
                             readOnly
                           />
                         </div>
@@ -227,7 +227,7 @@ export const Chair = () => {
                           <input
                             type={"text"}
                             step={0.1}
-                            value={select.column.rotation[index][2]}
+                            value={select.column.rotation[index][2].toFixed(1)}
                             readOnly
                           />
                         </div>
