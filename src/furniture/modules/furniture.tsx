@@ -10,7 +10,7 @@ type StoreType = {
     column: {
       material: string;
       chairColumn: Array<Array<number>>;
-      select: number;
+      select: number | boolean;
       width: Array<number>;
       height: Array<number>;
       rotation: Array<Array<number>>;
