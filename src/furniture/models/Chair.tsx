@@ -22,23 +22,22 @@ const Column = () => {
           <mesh
             onClick={(e: any) => {
               e.stopPropagation();
-
-              dispatch(columnSelect(select === columnIndex ? -1 : columnIndex));
+              dispatch(columnSelect(select === columnIndex ? false : columnIndex));
             }}
             onPointerOver={(e: any) => {
               e.stopPropagation();
-              e.object.material.color.set(new Color(0, 1, 0.5));
+              select === columnIndex ? null : e.object.material.color.set(new Color(0.5, 0.5, 0.5));
             }}
             onPointerOut={(e: any) => {
               e.stopPropagation();
-              e.object.material.color.set(new Color(0, 0, 1));
+              select === columnIndex ? null : e.object.material.color.set(new Color(0, 0, 0));
             }}
             position={new Vector3(0, i[1] - height[columnIndex] / 2, 0)}
             key={"column" + columnIndex}>
             <cylinderGeometry
               args={[width[columnIndex], width[columnIndex], height[columnIndex], 24]}
             />
-            <meshBasicMaterial color={"blue"} />
+            <meshBasicMaterial color={select === columnIndex ? "gray" : "black"} />
           </mesh>
           {columnIndex === select ? <axesHelper dispose={null} scale={5} /> : null}
         </group>
@@ -77,7 +76,9 @@ export const ChairField = () => {
                   }}
                   onPointerOver={(e: ThreeEvent<PointerEvent> | any) => {
                     e.stopPropagation();
-                    if (guide) e.object.material.color.set(new Color(1, 2.5, 1));
+                    if (guide) {
+                      e.object.material.color.set(new Color(1, 2.5, 1));
+                    }
                   }}
                   onPointerOut={(e: ThreeEvent<PointerEvent> | any) => {
                     e.stopPropagation();
