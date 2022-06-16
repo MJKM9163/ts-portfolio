@@ -11,7 +11,6 @@ const Column = () => {
     (state: RootState) => state.furniture.chairOption.column
   );
   const dispatch = useDispatch();
-  console.log(select);
   return (
     <group>
       {chairColumn.map((i, columnIndex: number) => (
