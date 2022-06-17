@@ -1,4 +1,4 @@
-import { ThreeEvent, useFrame } from "@react-three/fiber";
+import { ThreeEvent } from "@react-three/fiber";
 import { createColumn, columnSelect } from "furniture/modules/furniture";
 import { RootState } from "furniture/modules/store";
 import { useRef } from "react";
